@@ -1,11 +1,29 @@
+/*
+Note:
+This program rotates an array by k positions.
+It uses reversal algorithm:
+1. Reverse the entire array.
+2. Reverse the first k elements.
+3. Reverse the remaining elements.
+This ensures the array is rotated efficiently in O(n) time with O(1) space.
+*/
+
 #include <iostream>
 using namespace std;
 
+void reverseArray(int arr[], int start, int end) {
+    while (start < end) {
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
+    }
+}
+
 void rotateArray(int arr[], int size, int k) {
     k = k % size; // Handle cases where k > size
-    reverse(arr, arr + size);
-    reverse(arr, arr + k);
-    reverse(arr + k, arr + size);
+    reverseArray(arr, 0, size - 1);
+    reverseArray(arr, 0, k - 1);
+    reverseArray(arr, k, size - 1);
 }
 
 int main() {
